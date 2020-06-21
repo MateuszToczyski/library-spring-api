@@ -7,6 +7,8 @@ import com.library.service.DbService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/v1/book")
 @CrossOrigin(origins = "*")
@@ -19,5 +21,10 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET, value = "getBook")
     public BookDto getBook(@RequestParam Long id) {
         return bookMapper.mapToBookDto(dbService.getBook(id).orElseThrow(BookNotFoundException::new));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
+    public BookDto createBook(@RequestBody BookDto bookDto) {
+        return bookMapper.mapToBookDto(dbService.saveBook(bookMapper.mapToBook(bookDto)));
     }
 }

@@ -16,4 +16,8 @@ public class DbService {
     public Optional<Book> getBook(Long id) {
         return bookRepository.findById(id);
     }
+
+    public Book saveBook(Book book) {
+        return bookRepository.save(book);
+    }
 }
