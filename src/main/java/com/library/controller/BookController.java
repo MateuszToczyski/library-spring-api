@@ -7,6 +7,8 @@ import com.library.service.BookDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -15,16 +17,31 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @AllArgsConstructor
 public class BookController {
 
-    private final BookDbService bookDbService;
-    private final BookMapper bookMapper;
+    private final BookDbService dbService;
+    private final BookMapper mapper;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<BookDto> getBooks() {
+        return mapper.mapToBookDtoList(dbService.getAllBooks());
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
     public BookDto getBook(@PathVariable Long id) {
-        return bookMapper.mapToBookDto(bookDbService.getBook(id).orElseThrow(BookNotFoundException::new));
+        return mapper.mapToBookDto(dbService.getBook(id).orElseThrow(BookNotFoundException::new));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public BookDto createBook(@RequestBody BookDto bookDto) {
-        return bookMapper.mapToBookDto(bookDbService.saveBook(bookMapper.mapToBook(bookDto)));
+        return mapper.mapToBookDto(dbService.saveBook(mapper.mapToBook(bookDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public BookDto updateBook(@RequestBody BookDto bookDto) {
+        return mapper.mapToBookDto(dbService.saveBook(mapper.mapToBook(bookDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
+    public void deleteBook(@PathVariable Long id) {
+        dbService.deleteBook(id);
     }
 }

@@ -5,19 +5,28 @@ import com.library.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class BookDbService {
 
-    private final BookRepository bookRepository;
+    private final BookRepository repository;
+
+    public List<Book> getAllBooks() {
+        return repository.findAll();
+    }
 
     public Optional<Book> getBook(Long id) {
-        return bookRepository.findById(id);
+        return repository.findById(id);
     }
 
     public Book saveBook(Book book) {
-        return bookRepository.save(book);
+        return repository.save(book);
+    }
+
+    public void deleteBook(Long id) {
+        repository.deleteById(id);
     }
 }

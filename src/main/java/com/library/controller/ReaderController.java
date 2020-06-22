@@ -7,6 +7,8 @@ import com.library.service.ReaderDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -15,16 +17,31 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @AllArgsConstructor
 public class ReaderController {
 
-    private final ReaderDbService readerDbService;
-    private final ReaderMapper readerMapper;
+    private final ReaderDbService dbService;
+    private final ReaderMapper mapper;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<ReaderDto> getReaders() {
+        return mapper.mapToReaderDtoList(dbService.getAllReaders());
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
     public ReaderDto getReader(@PathVariable Long id) {
-         return readerMapper.mapToReaderDto(readerDbService.getReader(id).orElseThrow(ReaderNotFoundException::new));
+         return mapper.mapToReaderDto(dbService.getReader(id).orElseThrow(ReaderNotFoundException::new));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public ReaderDto createReader(@RequestBody ReaderDto readerDto) {
-        return readerMapper.mapToReaderDto(readerDbService.saveReader(readerMapper.mapToReader(readerDto)));
+        return mapper.mapToReaderDto(dbService.saveReader(mapper.mapToReader(readerDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ReaderDto updateReader(@RequestBody ReaderDto readerDto) {
+        return mapper.mapToReaderDto(dbService.saveReader(mapper.mapToReader(readerDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
+    public void deleteReader(@PathVariable Long id) {
+        dbService.deleteReader(id);
     }
 }
