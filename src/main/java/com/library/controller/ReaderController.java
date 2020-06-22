@@ -35,7 +35,7 @@ public class ReaderController {
         return mapper.mapToReaderDto(dbService.saveReader(mapper.mapToReader(readerDto)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, consumes = APPLICATION_JSON_VALUE)
     public ReaderDto updateReader(@RequestBody ReaderDto readerDto) {
         return mapper.mapToReaderDto(dbService.saveReader(mapper.mapToReader(readerDto)));
     }

@@ -35,7 +35,7 @@ public class BookController {
         return mapper.mapToBookDto(dbService.saveBook(mapper.mapToBook(bookDto)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, consumes = APPLICATION_JSON_VALUE)
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         return mapper.mapToBookDto(dbService.saveBook(mapper.mapToBook(bookDto)));
     }

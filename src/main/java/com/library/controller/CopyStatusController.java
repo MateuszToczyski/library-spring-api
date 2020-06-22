@@ -35,7 +35,7 @@ public class CopyStatusController {
         return mapper.mapToCopyStatusDto(dbService.saveStatus(mapper.mapToCopyStatus(statusDto)));
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, consumes = APPLICATION_JSON_VALUE)
     public CopyStatusDto updateStatus(@RequestBody CopyStatusDto statusDto) {
         return mapper.mapToCopyStatusDto(dbService.saveStatus(mapper.mapToCopyStatus(statusDto)));
     }
