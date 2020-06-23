@@ -1,17 +1,24 @@
 package com.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "books")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class Book {
+
+    public Book() {
+    }
+
+    public Book(Long id, String title, String author, LocalDate publicationDate) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publicationDate = publicationDate;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +32,12 @@ public class Book {
 
     @Column(name = "publication_date")
     private LocalDate publicationDate;
+
+    @OneToMany(
+            targetEntity = Copy.class,
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Copy> copies;
 }
