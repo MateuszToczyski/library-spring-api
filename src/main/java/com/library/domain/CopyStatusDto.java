@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CopyStatusDto {
-    private Long id;
-    private String name;
+    private final Long id;
+    private final String name;
 }

@@ -1,14 +1,11 @@
 package com.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "statuses")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class CopyStatus {
 
@@ -18,4 +15,15 @@ public class CopyStatus {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(targetEntity = Copy.class, mappedBy = "status", fetch = FetchType.LAZY)
+    private List<Copy> copies;
+
+    public CopyStatus() {
+    }
+
+    public CopyStatus(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

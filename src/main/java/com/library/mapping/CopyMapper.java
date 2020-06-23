@@ -1,6 +1,5 @@
 package com.library.mapping;
 
-import com.library.domain.BookDto;
 import com.library.domain.Copy;
 import com.library.domain.CopyDto;
 import org.springframework.stereotype.Component;

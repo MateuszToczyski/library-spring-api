@@ -10,18 +10,8 @@ import java.util.List;
 @Getter
 public class Book {
 
-    public Book() {
-    }
-
-    public Book(Long id, String title, String author, LocalDate publicationDate) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publicationDate = publicationDate;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "title")
@@ -33,11 +23,16 @@ public class Book {
     @Column(name = "publication_date")
     private LocalDate publicationDate;
 
-    @OneToMany(
-            targetEntity = Copy.class,
-            mappedBy = "book",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(targetEntity = Copy.class, mappedBy = "book", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Copy> copies;
+
+    public Book() {
+    }
+
+    public Book(Long id, String title, String author, LocalDate publicationDate) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publicationDate = publicationDate;
+    }
 }

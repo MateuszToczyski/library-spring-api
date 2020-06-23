@@ -1,14 +1,10 @@
 package com.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity(name = "copies")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class Copy {
 
@@ -23,4 +19,13 @@ public class Copy {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private CopyStatus status;
+
+    public Copy() {
+    }
+
+    public Copy(Long id, Book book, CopyStatus status) {
+        this.id = id;
+        this.book = book;
+        this.status = status;
+    }
 }
