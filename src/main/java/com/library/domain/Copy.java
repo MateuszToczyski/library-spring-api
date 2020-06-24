@@ -23,6 +23,11 @@ public class Copy {
     public Copy() {
     }
 
+    public Copy(Book book, CopyStatus status) {
+        this.book = book;
+        this.status = status;
+    }
+
     public Copy(Long id, Book book, CopyStatus status) {
         this.id = id;
         this.book = book;

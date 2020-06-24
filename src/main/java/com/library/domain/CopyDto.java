@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CopyDto {
     private final Long id;
-    private final Book book;
-    private final CopyStatus status;
+    private final BookDto book;
+    private final CopyStatusDto status;
 }

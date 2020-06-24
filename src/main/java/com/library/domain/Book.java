@@ -11,7 +11,7 @@ import java.util.List;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
@@ -23,7 +23,7 @@ public class Book {
     @Column(name = "publication_date")
     private LocalDate publicationDate;
 
-    @OneToMany(targetEntity = Copy.class, mappedBy = "book", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Copy.class, mappedBy = "book", fetch = FetchType.LAZY)
     private List<Copy> copies;
 
     public Book() {
