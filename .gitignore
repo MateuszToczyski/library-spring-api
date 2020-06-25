@@ -1,9 +1,8 @@
 HELP.md
 .gradle
 build/
-src/main/resources/application.properties
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/java/**
+!**/src/main/**
 !**/src/test/**
 
 ### STS ###
