@@ -20,7 +20,7 @@ public class BookMapper {
 
     public List<BookDto> mapToBookDtoList(List<Book> books) {
         return books.stream()
-                .map(book -> new BookDto(book.getId(), book.getTitle(), book.getAuthor(), book.getPublicationDate()))
+                .map(this::mapToBookDto)
                 .collect(Collectors.toList());
     }
 }

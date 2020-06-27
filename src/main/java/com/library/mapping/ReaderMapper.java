@@ -20,7 +20,7 @@ public class ReaderMapper {
 
     public List<ReaderDto> mapToReaderDtoList(List<Reader> readers) {
         return readers.stream()
-                .map(reader -> new ReaderDto(reader.getId(), reader.getName(), reader.getJoinDate()))
+                .map(this::mapToReaderDto)
                 .collect(Collectors.toList());
     }
 }

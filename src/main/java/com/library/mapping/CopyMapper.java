@@ -1,7 +1,13 @@
 package com.library.mapping;
 
+import com.library.domain.Book;
 import com.library.domain.Copy;
 import com.library.domain.CopyDto;
+import com.library.domain.CopyStatus;
+import com.library.exception.BookNotFoundException;
+import com.library.exception.CopyStatusNotFoundException;
+import com.library.service.BookDbService;
+import com.library.service.CopyStatusDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,23 +18,26 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CopyMapper {
 
-    private final BookMapper bookMapper;
-    private final CopyStatusMapper statusMapper;
+    private final BookDbService bookDbService;
+    private final CopyStatusDbService statusDbService;
 
     public Copy mapToCopy(CopyDto copyDto) {
-        return new Copy(copyDto.getId(), bookMapper.mapToBook(copyDto.getBook()),
-                statusMapper.mapToCopyStatus(copyDto.getStatus()));
+        Long id = copyDto.getId();
+        Book book = bookDbService.getBook(copyDto.getBookId()).orElseThrow(BookNotFoundException::new);
+        CopyStatus status = statusDbService.getStatus(copyDto.getStatusId()).orElseThrow(CopyStatusNotFoundException::new);
+        return new Copy(id, book, status);
     }
 
     public CopyDto mapToCopyDto(Copy copy) {
-        return new CopyDto(copy.getId(), bookMapper.mapToBookDto(copy.getBook()),
-                statusMapper.mapToCopyStatusDto(copy.getStatus()));
+        Long id = copy.getId();
+        Long bookId = copy.getBook().getId();
+        Long statusId = copy.getStatus().getId();
+        return new CopyDto(id, bookId, statusId);
     }
 
     public List<CopyDto> mapToCopyDtoList(List<Copy> copies) {
         return copies.stream()
-                .map(copy -> new CopyDto(copy.getId(), bookMapper.mapToBookDto(copy.getBook()),
-                        statusMapper.mapToCopyStatusDto(copy.getStatus())))
+                .map(this::mapToCopyDto)
                 .collect(Collectors.toList());
     }
 }

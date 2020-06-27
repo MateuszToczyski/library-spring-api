@@ -23,7 +23,7 @@ public class CopyController {
         return mapper.mapToCopyDtoList(dbService.getAllCopies());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAvailableByBookId/{bookId}")
+    @RequestMapping(method = RequestMethod.GET, value = "getAvailable/{bookId}")
     public List<CopyDto> getAvailableCopiesByBookId(@PathVariable Long bookId) {
         return mapper.mapToCopyDtoList(dbService.getAvailableCopiesByBookId(bookId));
     }

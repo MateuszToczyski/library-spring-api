@@ -20,7 +20,7 @@ public class CopyStatusMapper {
 
     public List<CopyStatusDto> mapToCopyStatusDtoList(List<CopyStatus> copyStatuses) {
         return copyStatuses.stream()
-                .map(copyStatus -> new CopyStatusDto(copyStatus.getId(), copyStatus.getName()))
+                .map(this::mapToCopyStatusDto)
                 .collect(Collectors.toList());
     }
 }
