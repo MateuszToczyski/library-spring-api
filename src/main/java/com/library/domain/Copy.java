@@ -1,8 +1,11 @@
 package com.library.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "copies")
 @Getter
@@ -16,9 +19,13 @@ public class Copy {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @Setter
     @ManyToOne
     @JoinColumn(name = "status_id")
     private CopyStatus status;
+
+    @OneToMany(targetEntity = Borrow.class, mappedBy = "copy", cascade = CascadeType.ALL)
+    private final List<Borrow> borrows = new ArrayList<>();
 
     public Copy() {
     }

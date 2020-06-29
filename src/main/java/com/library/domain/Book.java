@@ -23,7 +23,7 @@ public class Book {
     @Column(name = "publication_date")
     private LocalDate publicationDate;
 
-    @OneToMany(targetEntity = Copy.class, mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Copy.class, mappedBy = "book")
     private List<Copy> copies;
 
     public Book() {

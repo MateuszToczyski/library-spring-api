@@ -1,6 +1,7 @@
 package com.library.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ public class Borrow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "copy_id")
     private Copy copy;
 
@@ -24,6 +25,7 @@ public class Borrow {
     @Column(name = "start_date")
     private LocalDate startDate;
 
+    @Setter
     @Column(name = "end_date")
     private LocalDate endDate;
 
