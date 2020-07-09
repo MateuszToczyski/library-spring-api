@@ -14,7 +14,7 @@ public class Borrow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "copy_id")
     private Copy copy;
 
