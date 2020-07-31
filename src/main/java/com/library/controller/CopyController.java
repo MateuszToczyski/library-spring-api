@@ -1,6 +1,5 @@
 package com.library.controller;
 
-import com.library.domain.Borrow;
 import com.library.domain.BorrowDto;
 import com.library.domain.CopyDto;
 import com.library.exception.CopyNotFoundException;
