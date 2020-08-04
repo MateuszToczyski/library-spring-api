@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.domain.Borrow;
 import com.library.domain.ReaderDto;
 import com.library.exception.ReaderNotFoundException;
 import com.library.mapping.ReaderMapper;
@@ -43,5 +44,10 @@ public class ReaderController {
     @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
     public void deleteReader(@PathVariable Long id) {
         dbService.deleteReader(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{readerId}")
+    public List<Borrow> getBorrowHistory(@PathVariable Long readerId) {
+        return dbService.getBorrowHistory(readerId);
     }
 }

@@ -1,6 +1,8 @@
 package com.library.service;
 
+import com.library.domain.Borrow;
 import com.library.domain.Reader;
+import com.library.exception.ReaderNotFoundException;
 import com.library.repository.ReaderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,5 +30,10 @@ public class ReaderDbService {
 
     public void deleteReader(Long id) {
         repository.deleteById(id);
+    }
+
+    public List<Borrow> getBorrowHistory(Long readerId) {
+        Reader reader = repository.findById(readerId).orElseThrow(ReaderNotFoundException::new);
+        return reader.getBorrows();
     }
 }
