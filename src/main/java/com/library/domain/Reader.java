@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "readers")
 @Getter
@@ -20,6 +22,9 @@ public class Reader {
 
     @Column(name = "join_date")
     private LocalDate joinDate;
+
+    @OneToMany(targetEntity = Borrow.class, mappedBy = "reader", cascade = CascadeType.ALL)
+    private final List<Borrow> borrows = new ArrayList<>();
 
     public Reader() {
     }
