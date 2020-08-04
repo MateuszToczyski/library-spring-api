@@ -12,7 +12,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/v1/statuses")
+@RequestMapping("administration/statuses")
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class CopyStatusController {

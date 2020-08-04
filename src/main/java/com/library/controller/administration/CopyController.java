@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/copies")
+@RequestMapping("administration/copies")
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class CopyController {
