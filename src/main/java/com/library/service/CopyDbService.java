@@ -34,6 +34,10 @@ public class CopyDbService {
         return copyRepository.save(copy);
     }
 
+    public void deleteCopy(Long id) {
+        copyRepository.deleteById(id);
+    }
+
     public Copy borrowCopy(Long copyId, Long readerId) {
         Copy copy = copyRepository.findById(copyId).orElseThrow(CopyNotFoundException::new);
         if(!copy.getStatus().getId().equals(1L)) {
@@ -62,9 +66,5 @@ public class CopyDbService {
     public List<Borrow> getBorrowHistory(Long copyId) {
         Copy copy = copyRepository.findById(copyId).orElseThrow(CopyNotFoundException::new);
         return copy.getBorrows();
-    }
-
-    public void deleteCopy(Long id) {
-        copyRepository.deleteById(id);
     }
 }
