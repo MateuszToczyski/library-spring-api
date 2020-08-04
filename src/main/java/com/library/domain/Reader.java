@@ -1,12 +1,14 @@
 package com.library.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity(name = "readers")
 @Getter
+@Setter
 public class Reader {
 
     @Id

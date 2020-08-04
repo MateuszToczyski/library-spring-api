@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity(name = "copies")
 @Getter
+@Setter
 public class Copy {
 
     @Id
@@ -19,7 +20,6 @@ public class Copy {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Setter
     @ManyToOne
     @JoinColumn(name = "status_id")
     private CopyStatus status;
