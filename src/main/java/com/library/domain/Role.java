@@ -25,7 +25,7 @@ public class Role {
             joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "reader_id", referencedColumnName = "id")}
     )
-    private List<Reader> readers = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

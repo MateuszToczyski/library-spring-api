@@ -21,7 +21,7 @@ public class Borrow {
 
     @ManyToOne
     @JoinColumn(name = "reader_id")
-    private Reader reader;
+    private User user;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -32,16 +32,16 @@ public class Borrow {
     public Borrow() {
     }
 
-    public Borrow(Copy copy, Reader reader, LocalDate startDate) {
+    public Borrow(Copy copy, User user, LocalDate startDate) {
         this.copy = copy;
-        this.reader = reader;
+        this.user = user;
         this.startDate = startDate;
     }
 
-    public Borrow(Long id, Copy copy, Reader reader, LocalDate startDate, LocalDate endDate) {
+    public Borrow(Long id, Copy copy, User user, LocalDate startDate, LocalDate endDate) {
         this.id = id;
         this.copy = copy;
-        this.reader = reader;
+        this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
     }

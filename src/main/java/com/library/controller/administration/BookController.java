@@ -9,7 +9,6 @@ import com.library.service.BookDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -25,8 +24,7 @@ public class BookController {
     private final CopyMapper copyMapper;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<BookDto> getBooks(Principal principal) {
-        System.out.println(principal);
+    public List<BookDto> getBooks() {
         return bookMapper.mapToBookDtoList(dbService.getAllBooks());
     }
 

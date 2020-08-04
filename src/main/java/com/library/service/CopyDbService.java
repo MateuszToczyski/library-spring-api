@@ -17,7 +17,7 @@ public class CopyDbService {
     private final CopyRepository copyRepository;
     private final BookRepository bookRepository;
     private final CopyStatusRepository statusRepository;
-    private final ReaderRepository readerRepository;
+    private final UserRepository userRepository;
 
     public List<Copy> getAllCopies() {
         return copyRepository.findAll();
@@ -43,10 +43,10 @@ public class CopyDbService {
         if(!copy.getStatus().getId().equals(1L)) {
             throw new CopyStatusException("Copy already borrowed");
         }
-        Reader reader = readerRepository.findById(readerId).orElseThrow(ReaderNotFoundException::new);
+        User user = userRepository.findById(readerId).orElseThrow(UserNotFoundException::new);
         CopyStatus status = statusRepository.findById(2L).orElseThrow(CopyStatusNotFoundException::new);
         copy.setStatus(status);
-        Borrow borrow = new Borrow(copy, reader, LocalDate.now());
+        Borrow borrow = new Borrow(copy, user, LocalDate.now());
         copy.getBorrows().add(borrow);
         return copyRepository.save(copy);
     }

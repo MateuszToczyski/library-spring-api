@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Entity(name = "readers")
 @Getter
 @Setter
-public class Reader implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,10 +45,10 @@ public class Reader implements UserDetails {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public Reader() {
+    public User() {
     }
 
-    public Reader(Long id, String name, LocalDate joinDate, String password, String email) {
+    public User(Long id, String name, LocalDate joinDate, String password, String email) {
         this.id = id;
         this.name = name;
         this.joinDate = joinDate;
@@ -56,7 +56,7 @@ public class Reader implements UserDetails {
         this.email = email;
     }
 
-    public Reader(String name, LocalDate joinDate, String password, String email) {
+    public User(String name, LocalDate joinDate, String password, String email) {
         this.name = name;
         this.joinDate = joinDate;
         this.password = password;
