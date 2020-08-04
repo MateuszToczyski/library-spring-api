@@ -1,4 +1,4 @@
-package com.library.controller;
+package com.library.controller.administration;
 
 import com.library.domain.CopyStatusDto;
 import com.library.exception.CopyStatusNotFoundException;

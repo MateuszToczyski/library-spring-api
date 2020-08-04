@@ -1,5 +1,6 @@
 package com.library.mapping;
 
+
 import com.library.domain.Reader;
 import com.library.domain.ReaderDto;
 import org.springframework.stereotype.Component;
@@ -11,11 +12,14 @@ import java.util.stream.Collectors;
 public class ReaderMapper {
 
     public Reader mapToReader(ReaderDto readerDto) {
-        return new Reader(readerDto.getId(), readerDto.getName(), readerDto.getJoinDate());
+        return new Reader(readerDto.getId(), readerDto.getName(), readerDto.getJoinDate(),
+                readerDto.getPassword(), readerDto.getEmail());
     }
 
     public ReaderDto mapToReaderDto(Reader reader) {
-        return new ReaderDto(reader.getId(), reader.getName(), reader.getJoinDate());
+        return new ReaderDto(reader.getId(), reader.getName(), reader.getJoinDate(),
+                reader.getPassword(), reader.getEmail());
+
     }
 
     public List<ReaderDto> mapToReaderDtoList(List<Reader> readers) {

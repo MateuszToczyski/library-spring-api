@@ -5,6 +5,7 @@ import com.library.domain.Reader;
 import com.library.exception.ReaderNotFoundException;
 import com.library.repository.ReaderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class ReaderDbService {
 
     private final ReaderRepository repository;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public List<Reader> getAllReaders() {
         return repository.findAll();
@@ -25,6 +27,9 @@ public class ReaderDbService {
     }
 
     public Reader saveReader(Reader reader) {
+        if(reader.getId() == null) {
+            reader.setPassword(encoder.encode(reader.getPassword()));
+        }
         return repository.save(reader);
     }
 
