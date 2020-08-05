@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Entity(name = "readers")
+@Entity(name = "users")
 @Getter
 @Setter
 public class User implements UserDetails {
@@ -34,13 +34,13 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(targetEntity = Borrow.class, mappedBy = "reader", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Borrow.class, mappedBy = "user", cascade = CascadeType.ALL)
     private final List<Borrow> borrows = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "readers_roles",
-            joinColumns = {@JoinColumn(name = "reader_id", referencedColumnName = "id")},
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> roles = new ArrayList<>();

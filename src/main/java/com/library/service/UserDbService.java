@@ -26,10 +26,12 @@ public class UserDbService {
         return repository.findById(id);
     }
 
-    public User saveUser(User user) {
-        if(user.getId() == null) {
-            user.setPassword(encoder.encode(user.getPassword()));
-        }
+    public User updateUser(User user) {
+        return repository.save(user);
+    }
+
+    public User createUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return repository.save(user);
     }
 

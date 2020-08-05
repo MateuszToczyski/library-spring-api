@@ -20,7 +20,7 @@ public class Borrow {
     private Copy copy;
 
     @ManyToOne
-    @JoinColumn(name = "reader_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "start_date")

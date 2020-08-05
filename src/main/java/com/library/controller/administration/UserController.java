@@ -33,12 +33,12 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public UserDto createUser(@RequestBody UserDto userDto) {
-        return mapper.mapToUserDto(dbService.saveUser(mapper.mapToUser(userDto)));
+        return mapper.mapToUserDto(dbService.createUser(mapper.mapToUser(userDto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = APPLICATION_JSON_VALUE)
     public UserDto updateUser(@RequestBody UserDto userDto) {
-        return mapper.mapToUserDto(dbService.saveUser(mapper.mapToUser(userDto)));
+        return mapper.mapToUserDto(dbService.updateUser(mapper.mapToUser(userDto)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "{id}")

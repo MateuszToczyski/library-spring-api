@@ -1,4 +1,4 @@
-package com.library.service;
+package com.library.security;
 
 import com.library.repository.UserRepository;
 import lombok.AllArgsConstructor;

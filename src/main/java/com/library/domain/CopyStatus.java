@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "statuses")
+@Entity(name = "copy_statuses")
 @Getter
 @Setter
 public class CopyStatus {
