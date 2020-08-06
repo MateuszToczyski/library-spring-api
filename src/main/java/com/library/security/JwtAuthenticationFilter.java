@@ -44,10 +44,10 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
                 .setSigningKey(secretKey.getBytes())
                 .parseClaimsJws(header.replace("Bearer ", ""));
 
+        String username = claimsJws.getBody().get("sub").toString();
+
         List<AuthorityWrapper> wrappedAuthorities =
                 Arrays.asList(gson.fromJson(claimsJws.getBody().get("roles").toString(), AuthorityWrapper[].class));
-
-        String username = claimsJws.getBody().get("sub").toString();
 
         Set<SimpleGrantedAuthority> authorities = wrappedAuthorities.stream()
                 .map(authorityWrapper -> new SimpleGrantedAuthority(authorityWrapper.getAuthority()))
